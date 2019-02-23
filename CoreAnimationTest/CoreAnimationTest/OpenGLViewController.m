@@ -18,6 +18,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor lightGrayColor];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 30)];
+    label.text = @"修改内容 提交";
+    label.textColor = [UIColor blueColor];
+    [self.view addSubview:label];
 }
 
 /*
