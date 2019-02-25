@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "UIImage+cropRect.h"
+#include <pthread.h>
 
 
 #define screenW self.view.frame.size.width
@@ -121,11 +122,11 @@
     
     [self customClockCount];
     
-    
     [self setChangeColorView];
     
-    
     [self customShapeLayer];
+    
+    [NSRunLoop currentRunLoop];
    
 }
 
@@ -382,7 +383,6 @@
     
     [self.view.layer addSublayer:shapeLayer];
     
-    
 }
 
 
@@ -397,7 +397,14 @@
     
 }
 
-
+- (void)drawInRect {
+    UIImage *image = [UIImage imageNamed:@"iOS版本分布"];
+    [image drawInRect:CGRectMake(screenW/2, screenH - 200, 100, 100)];
+    
+    //runloop相关
+//    pthreadPointer([NSThread currentThread]);
+//    CFDictionaryGetValue();
+}
 
 
 @end
