@@ -7,6 +7,7 @@
 //
 
 #import "OpenGLViewController.h"
+#import <CoreFoundation/CoreFoundation.h>
 
 @interface OpenGLViewController ()
 
@@ -22,16 +23,36 @@
     label.text = @"修改内容 提交";
     label.textColor = [UIColor blueColor];
     [self.view addSubview:label];
+      
 }
 
-/*
-#pragma mark - Navigation
+- (void)testRunloop {
+    
+    int reply = 0;
+    do {
+        if (1+reply == 1) {
+            reply = 1;
+        }else if (1+reply == 2){
+            reply = 0;
+        }
+        NSLog(@"---------------%d",reply);
+    } while (reply == 0);
+    
+    CFRunLoopAddCommonMode(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
+
+- (void)testTimer{
+    
+    UILabel *label = [[UILabel alloc] init];
+    __block int sec = 0;
+    __weak typeof(label) weakLabel = label;
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        sec ++;
+        weakLabel.text = [NSString stringWithFormat:@"%dS",sec];
+    }];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+}
+
 
 @end
